@@ -31,8 +31,8 @@ SET(HDRS
     )
 
 # add the main library
-add_library(stb SHARED ${SRCS} ${HDRS})
-add_library(stb ${SRCS} ${HDRS})
+#add_library(stb SHARED ${SRCS} ${HDRS})
+add_library(stb STATIC ${SRCS} ${HDRS})
  
 install (TARGETS stb DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install (FILES ${HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
