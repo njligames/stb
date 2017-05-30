@@ -1,3 +1,5 @@
+#include "android_file.h"
+
 /* stb_image_write - v1.03 - public domain - http://nothings.org/stb/stb_image_write.h
    writes out PNG/BMP/TGA images to C stdio - Sean Barrett 2010-2015
                                      no warranty implied; use at your own risk
@@ -220,7 +222,7 @@ static void stbi__stdio_write(void *context, void *data, int size)
 
 static int stbi__start_write_file(stbi__write_context *s, const char *filename)
 {
-   FILE *f = fopen(filename, "wb");
+   FILE *f = mobile__fopen(filename, "wb");
    stbi__start_write_callbacks(s, stbi__stdio_write, (void *) f);
    return f != NULL;
 }
@@ -996,7 +998,7 @@ STBIWDEF int stbi_write_png(char const *filename, int x, int y, int comp, const 
    int len;
    unsigned char *png = stbi_write_png_to_mem((unsigned char *) data, stride_bytes, x, y, comp, &len);
    if (png == NULL) return 0;
-   f = fopen(filename, "wb");
+   f = mobile__fopen(filename, "wb");
    if (!f) { STBIW_FREE(png); return 0; }
    fwrite(png, 1, len, f);
    fclose(f);

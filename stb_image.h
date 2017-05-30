@@ -1,3 +1,5 @@
+#include "android_file.h"
+
 /* stb_image - v2.14 - public domain image loader - http://nothings.org/stb_image.h
                                      no warranty implied; use at your own risk
 
@@ -1212,7 +1214,7 @@ static FILE *stbi__fopen(char const *filename, char const *mode)
    if (0 != fopen_s(&f, filename, mode))
       f=0;
 #else
-   f = fopen(filename, mode);
+   f = mobile__fopen(filename, mode);
 #endif
    return f;
 }
@@ -1222,7 +1224,7 @@ STBIDEF stbi_uc *stbi_load(char const *filename, int *x, int *y, int *comp, int 
 {
    FILE *f = stbi__fopen(filename, "rb");
    unsigned char *result;
-   if (!f) return stbi__errpuc("can't fopen", "Unable to open file");
+   if (!f) return stbi__errpuc("can't mobile__fopen", "Unable to open file");
    result = stbi_load_from_file(f,x,y,comp,req_comp);
    fclose(f);
    return result;
@@ -1258,7 +1260,7 @@ STBIDEF stbi_us *stbi_load_16(char const *filename, int *x, int *y, int *comp, i
 {
    FILE *f = stbi__fopen(filename, "rb");
    stbi__uint16 *result;
-   if (!f) return (stbi_us *) stbi__errpuc("can't fopen", "Unable to open file");
+   if (!f) return (stbi_us *) stbi__errpuc("can't mobile__fopen", "Unable to open file");
    result = stbi_load_from_file_16(f,x,y,comp,req_comp);
    fclose(f);
    return result;
@@ -1319,7 +1321,7 @@ STBIDEF float *stbi_loadf(char const *filename, int *x, int *y, int *comp, int r
 {
    float *result;
    FILE *f = stbi__fopen(filename, "rb");
-   if (!f) return stbi__errpf("can't fopen", "Unable to open file");
+   if (!f) return stbi__errpf("can't mobile__fopen", "Unable to open file");
    result = stbi_loadf_from_file(f,x,y,comp,req_comp);
    fclose(f);
    return result;
@@ -6903,7 +6905,7 @@ STBIDEF int stbi_info(char const *filename, int *x, int *y, int *comp)
 {
     FILE *f = stbi__fopen(filename, "rb");
     int result;
-    if (!f) return stbi__err("can't fopen", "Unable to open file");
+    if (!f) return stbi__err("can't mobile__fopen", "Unable to open file");
     result = stbi_info_from_file(f, x, y, comp);
     fclose(f);
     return result;

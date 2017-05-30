@@ -1,3 +1,5 @@
+#include "android_file.h"
+
 // stb_c_lexer.h - v0.08 - public domain Sean Barrett 2013
 // lexer for making little C-like languages with recursive-descent parsers
 //
@@ -796,7 +798,7 @@ void dummy(void)
 
 int main(int argc, char **argv)
 {
-   FILE *f = fopen("stb_c_lexer.h","rb");
+   FILE *f = mobile__fopen("stb_c_lexer.h","rb");
    char *text = (char *) malloc(1 << 20);
    int len = f ? fread(text, 1, 1<<20, f) : -1;
    stb_lexer lex;

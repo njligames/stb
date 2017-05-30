@@ -1,3 +1,5 @@
+#include "android_file.h"
+
 // Ogg Vorbis audio decoder - v1.09 - public domain
 // http://nothings.org/stb_vorbis/
 //
@@ -244,7 +246,7 @@ extern stb_vorbis * stb_vorbis_open_memory(const unsigned char *data, int len,
 #ifndef STB_VORBIS_NO_STDIO
 extern stb_vorbis * stb_vorbis_open_filename(const char *filename,
                                   int *error, const stb_vorbis_alloc *alloc_buffer);
-// create an ogg vorbis decoder from a filename via fopen(). on failure,
+// create an ogg vorbis decoder from a filename via mobile__fopen(). on failure,
 // returns NULL and sets *error (possibly to VORBIS_file_open_failure).
 
 extern stb_vorbis * stb_vorbis_open_file(FILE *f, int close_handle_on_close,
@@ -352,7 +354,7 @@ enum STBVorbisError
    VORBIS_outofmem,                     // not enough memory
    VORBIS_feature_not_supported,        // uses floor 0
    VORBIS_too_many_channels,            // STB_VORBIS_MAX_CHANNELS is too small
-   VORBIS_file_open_failure,            // fopen() failed
+   VORBIS_file_open_failure,            // mobile__fopen() failed
    VORBIS_seek_without_length,          // can't seek in unknown-length file
 
    VORBIS_unexpected_eof=10,            // file is truncated?
@@ -4957,7 +4959,7 @@ stb_vorbis * stb_vorbis_open_file(FILE *file, int close_on_free, int *error, con
 
 stb_vorbis * stb_vorbis_open_filename(const char *filename, int *error, const stb_vorbis_alloc *alloc)
 {
-   FILE *f = fopen(filename, "rb");
+   FILE *f = mobile__fopen(filename, "rb");
    if (f) 
       return stb_vorbis_open_file(f, TRUE, error, alloc);
    if (error) *error = VORBIS_file_open_failure;

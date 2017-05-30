@@ -1,3 +1,5 @@
+#include "android_file.h"
+
 /* stb.h - v2.28 - Sean's Tool Box -- public domain -- http://nothings.org/stb.h
           no warranty is offered or implied; use this code at your own risk
 
@@ -915,7 +917,7 @@ void stbprint(const char *fmt, ...)
    #define stb__fopen(x,y)    _wfopen((const wchar_t *)stb__from_utf8(x), (const wchar_t *)stb__from_utf8_alt(y))
    #define stb__windows(x,y)  x
 #else
-   #define stb__fopen(x,y)    fopen(x,y)
+   #define stb__fopen(x,y)    mobile__fopen(x,y)
    #define stb__windows(x,y)  y
 #endif
 
@@ -1121,7 +1123,7 @@ void stb_log_name(char *s)
 void stb_(char *s, ...)
 {
    if (stb__log_active) {
-      FILE *f = fopen(stb__log_filename, "a");
+      FILE *f = mobile__fopen(stb__log_filename, "a");
       if (f) {
          va_list a;
          if (stb__log_fileline && stb__file)
@@ -1137,7 +1139,7 @@ void stb_(char *s, ...)
 
 void stb_append_to_file(char *filename, char *s, ...)
 {
-   FILE *f = fopen(filename, "a");
+   FILE *f = mobile__fopen(filename, "a");
    if (f) {
       va_list a;
       va_start(a,s);
@@ -5079,7 +5081,7 @@ STB_EXTERN int stb_tfwrite(void *data, size_t len, size_t count, STBF *f);
 STBF *stb_tfopen(char *filename, char *mode)
 {
    STBF *z;
-   FILE *f = fopen(filename, mode);
+   FILE *f = mobile__fopen(filename, mode);
    if (!f) return NULL;
    z = (STBF *) malloc(sizeof(*z));
    if (!z) { fclose(f); return NULL; }
@@ -5472,7 +5474,7 @@ FILE *  stb_fopen(char *filename, char *mode)
       if (stb_mktemp(temp_full) == NULL)
          return 0;
 
-      f = fopen(temp_full, mode);
+      f = mobile__fopen(temp_full, mode);
       if (f != NULL)
          break;
    }
@@ -6675,7 +6677,7 @@ STB_EXTERN stb_cfg * stb_cfg_open(char *config, char *mode)
    }
 
    if (mode[0] == 'w')
-      z->f = fopen(file, "wb");
+      z->f = mobile__fopen(file, "wb");
    else
       z->f = NULL;
 
@@ -6847,7 +6849,7 @@ static void stb__dirtree_save_db(char *filename, stb_dirtree *data, char *root)
    int i, num_dirs_final=0, num_files_final;
    char *info = root ? root : "";
    int *remap;
-   FILE *f = fopen(filename, "wb");
+   FILE *f = mobile__fopen(filename, "wb");
    if (!f) return;
 
    fwrite(stb__signature, sizeof(stb__signature), 1, f);
@@ -6895,7 +6897,7 @@ static void stb__dirtree_load_db(char *filename, stb_dirtree *data, char *dir)
 {
    char sig[2048];
    int i,n;
-   FILE *f = fopen(filename, "rb");
+   FILE *f = mobile__fopen(filename, "rb");
 
    if (!f) return;
 
@@ -7445,7 +7447,7 @@ void stb_wrapper_listall(void (*func)(void *ptr, int sz, char *file, int line))
 void stb_wrapper_dump(char *filename)
 {
    int i;
-   FILE *f = fopen(filename, "w");
+   FILE *f = mobile__fopen(filename, "w");
    if (!f) return;
    for (i=0; i < stb__alloc_size; ++i)
       if (stb__allocations[i].p > STB_DEL)
@@ -9936,7 +9938,7 @@ static void stb__introspect_compute(char *path, char *file)
    char ** include_list = NULL;
    char ** introspect_list = NULL;
    FILE *f;
-   f = fopen(file, "w");
+   f = mobile__fopen(file, "w");
    if (!f) return;
 
    fputs("// if you get compiler errors, change the following 0 to a 1:\n", f);
@@ -10239,7 +10241,7 @@ char *stb_decompress_fromfile(char *filename, unsigned int *len)
    unsigned int n;
    char *q;
    unsigned char *p;
-   FILE *f = fopen(filename, "rb");   if (f == NULL) return NULL;
+   FILE *f = mobile__fopen(filename, "rb");   if (f == NULL) return NULL;
    fseek(f, 0, SEEK_END);
    n = ftell(f);
    fseek(f, 0, SEEK_SET);
@@ -10564,7 +10566,7 @@ int stb_compress_tofile(char *filename, char *input, unsigned int length)
    //int blen = stb_compress((stb_uchar*)buffer, (stb_uchar*)input, length);
    
    stb__out = NULL;
-   stb__outfile = fopen(filename, "wb");
+   stb__outfile = mobile__fopen(filename, "wb");
    if (!stb__outfile) return 0;
 
    stb__outbytes = 0;
@@ -10949,7 +10951,7 @@ static void stb__fclose2(stbfile *f)
 
 stbfile *stb_open(char *filename, char *mode)
 {
-   FILE *f = fopen(filename, mode);
+   FILE *f = mobile__fopen(filename, mode);
    stbfile *s;
    if (f == NULL) return NULL;
    s = stb_openf(f);
@@ -12206,7 +12208,7 @@ static void * stb__io_task(void *p)
       if (!f)
          return stb__io_error(dc);
    } else {
-      f = fopen(dc->filename, "rb");
+      f = mobile__fopen(dc->filename, "rb");
       free(dc->filename);
       if (!f)
          return stb__io_error(dc);
