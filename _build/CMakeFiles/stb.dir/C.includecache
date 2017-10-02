@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../android_file.h
+stdio.h
+-
+android/asset_manager_jni.h
+-
+assert.h
+-
+errno.h
+-
+unistd.h
+-
+
+/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/stb_vorbis.c
+android_file.h
+/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/android_file.h
+stdio.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+math.h
+-
+malloc.h
+-
+alloca.h
+-
+limits.h
+-
+crtdbg.h
+-
+

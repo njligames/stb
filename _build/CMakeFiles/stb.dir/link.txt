@@ -1,0 +1,1 @@
+/Applications/Developer/emsdk_portable/emscripten/1.37.9/em++  -fPIC -s EXPORTED_FUNCTIONS="['_ogg_sync_init']" -s LINKABLE=1 -std=gnu++11 -DNDEBUG -O2 -O2 -shared -Wl,-soname,libstb.so -o libstb.so @CMakeFiles/stb.dir/objects1.rsp 
