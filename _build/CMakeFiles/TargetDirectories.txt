@@ -1,7 +1,0 @@
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/install/local.dir
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/install/strip.dir
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/install.dir
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/stb.dir
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/list_install_components.dir
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/rebuild_cache.dir
-/Users/jamesfolk/Documents/NJLI/External/thirdparty/stb/_build/CMakeFiles/edit_cache.dir
